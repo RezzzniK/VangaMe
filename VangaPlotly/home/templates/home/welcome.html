@@ -1,13 +1,39 @@
 {% extends "base.html" %} {% load static %} {%block content%}
 <p></p>
-{%load plotly_dash%}
+{%load plotly_dash%} {% load bootstrap_icons %}
 <h1>Home Page</h1>
+<div class="table">
+  <table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Coin Name</th>
+        <th scope="col">Prediction</th>
+        <th scope="col">Prediction Accurracy</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for rowTable in table_prediction %}
+      <tr>
+        {% for rowRow in rowTable %} {% if rowRow == 'Positive' %}
+        <td style="color: rgb(22, 244, 22)">{% bs_icon 'arrow-up' %}</td>
+        {% elif rowRow == 'Negative' %}
+        <td style="color: rgb(233, 25, 17)">{% bs_icon 'arrow-down' %}</td>
+        {% else %}
+        <td>{{rowRow}}</td>
+        {% endif %} {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 <div
   class="{% plotly_class name='SimpleExample' %} card"
   style="width: 100%; height: 100%"
 >
   {% plotly_app name="SimpleExample" ratio=0.65 %}
 </div>
-{% endblock %}
+<br />
+<hr />
+{{ plot|safe }} {% endblock %}
 
 <!--   -->

@@ -21,15 +21,16 @@ app.layout=html.Div([
 
 ])
 @app.callback(
+    
     [Output('slider-graph','figure'),
     Output('updatemode-output-container','children')],
     [Input('slider-updatemode','value')]
 )
 def diplay_value(value):
-    x=[]
+    x=[2.1,2.2,25]
     for i in range(value):
         x.append(i)
-    y=[]
+    y=[1,2,3,4,5]
     for i in range(value):
         y.append(i*i)
     graph=go.Scatter(
@@ -46,4 +47,4 @@ def diplay_value(value):
 
 
     )
-    return {'data':[graph],'layout':layout}, f'Value:{round(value,1)} Square:{value*value}'
+    return {'data':[graph],'layout':layout},f'Value:{round(value,1)} Square:{value*value}'
