@@ -7,12 +7,12 @@ from datetime import datetime, timedelta, timezone
 from time import perf_counter
 from pygooglenews import GoogleNews
 
-from vanga_configs import *
-from vanga_configs import __DETAILED_PRINTING__
-from core.pygooglenews_core import get_stories, get_entries
-from core.vaderSentiment_core import get_sentiment_compound, get_crypto_coins_evaluations
-from utils.dates_util import init_all_dates_for_ticker, get_dates_between_dates, get_str_dates_from_dates
-from utils.files_util import output_temporary_data_to_coin_file, output_predictions, \
+from home.prediction_app.vanga_configs import *
+from home.prediction_app.vanga_configs import __DETAILED_PRINTING__
+from home.prediction_app.core.pygooglenews_core import get_stories, get_entries
+from home.prediction_app.core.vaderSentiment_core import get_sentiment_compound, get_crypto_coins_evaluations
+from home.prediction_app.utils.dates_util import init_all_dates_for_ticker, get_dates_between_dates, get_str_dates_from_dates
+from home.prediction_app.utils.files_util import output_temporary_data_to_coin_file, output_predictions, \
     create_data_collecting_directory, output_final_data_to_summary_file, write_prediction_to_sql
 
 import sqlite3
@@ -422,6 +422,8 @@ def get_coins_predictions_for_last_x_hours_or_days(coin_names, _days_to_subtract
 
     predictions_arr = []
     for prediction in predictions.items():
+        while prediction[1][1]>1:
+            prediction[1][1]/=10
         predictions_arr.append([prediction[0], prediction[1][0], prediction[1][1]])
 
     return predictions_arr

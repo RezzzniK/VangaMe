@@ -1,10 +1,10 @@
-from os import mkdir
+from os import mkdir, makedirs
 from datetime import datetime
-from vanga_configs import *
+# from home.prediction_app.vanga_configs import *
 
 import sqlite3
-from vanga_configs import *
-from vanga_configs import __DETAILED_PRINTING__
+from home.prediction_app.vanga_configs import *
+from home.prediction_app.vanga_configs import __DETAILED_PRINTING__
 # use for debug printing
 # __DETAILED_PRINTING__ = False
 
@@ -293,20 +293,24 @@ def create_data_collecting_directory(directory_name):
 
 def output_predictions(predictions_dict, collected_time, throwback_collected_time):
     summary_filename = 'Future_Predictions' + '\\' + "_Prediction_Summary " + collected_time + ".txt"
+    
+    try:
+        makedirs('Future_Predictions', exist_ok=True)
+        with open(summary_filename, "a") as summary_file:
+            write_data = f"Collected data for last: {throwback_collected_time}\n" + \
+                        f"Collected at: {collected_time}\n" + \
+                        f'-------------------------------------------------\n\n'
+            summary_file.write(f"{write_data}")
 
-    with open(summary_filename, "a") as summary_file:
-        write_data = f"Collected data for last: {throwback_collected_time}\n" + \
-                     f"Collected at: {collected_time}\n" + \
-                     f'-------------------------------------------------\n\n'
-        summary_file.write(f"{write_data}")
+            for prediction in predictions_dict.items():
+                # if __DETAILED_PRINTING__:
+                # print(f'{prediction[0]}: {prediction[1][0]} shift prediction')
 
-        for prediction in predictions_dict.items():
-            # if __DETAILED_PRINTING__:
-            # print(f'{prediction[0]}: {prediction[1][0]} shift prediction')
-
-            if prediction[1][0]:
-                write_data = f'Coin: {prediction[0]}\n' + \
-                             f'Shift Prediction: {prediction[1][0]}\n' + \
-                             f'Prediction Strength: {prediction[1][1]}\n' + \
-                             f'-------------------------------------------------\n\n'
-                summary_file.write(f"{write_data}")
+                if prediction[1][0]:
+                    write_data = f'Coin: {prediction[0]}\n' + \
+                                f'Shift Prediction: {prediction[1][0]}\n' + \
+                                f'Prediction Strength: {prediction[1][1]}\n' + \
+                                f'-------------------------------------------------\n\n'
+                    summary_file.write(f"{write_data}")
+    except Exception as ex:
+        print(f"Error in output_predictions:\n{ex}")

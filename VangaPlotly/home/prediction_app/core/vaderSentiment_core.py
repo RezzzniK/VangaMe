@@ -1,5 +1,5 @@
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-import vanga_configs as cfg
+import home.prediction_app.vanga_configs as cfg
 # Create A Sentiment Analyzer Object
 sentimentAnalyzer = SentimentIntensityAnalyzer()
 
