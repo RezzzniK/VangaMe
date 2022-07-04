@@ -1,13 +1,32 @@
+from os import stat
+from turtle import st
 from django.shortcuts import render
 from matplotlib.axis import YAxis
 from plotly.offline import plot
 import plotly.graph_objects as go
 from sympy import div
- 
+import home.prediction_app.main as predict
+import home.prediction_app.vanga_me_core as vanga_core
+import home.prediction_app.vanga_configs as cfg
 # Create your views here.
 def home(requests):
+    
     def tabl_prediction():
-      return [['Bitcoin', 'Negative', -0.5874603174603177], ['Ethereum', 'Positive', 4.793968253968254], ['BinanceCoin', 'Positive', 14.990434782608697], ['Tether', 'Positive', 3.1046153846153848], ['Cardano ', 'Positive', 7.986666666666667], ['Solana', 'Positive', 4.785087719298245], ['XRP', 'Positive', 1.1396551724137938], ['Polkadot', 'Positive', 14.475294117647062], ['USDCoin', 'Positive', 8.722000000000001], ['Dogecoin', 'Positive', 0.8961403508771918], ['Avalanche', 'Positive', 19.9252380952381]]
+        print('sdfdsfsdfsdfsdfsdf')
+        #TODO :insert prediction func here FOR TABLE
+        status, predictions=predict.get_future_predictions(term_and_tickers=cfg.basic_search_term_google_and_yf_ticker_name, days_to_subtract=None, check_x_last_hours=24) 
+        print(f'=============================================={predictions}=========================')
+        if status:
+            return predictions
+        else:
+            return 'eeeeeeeee'
+        # status,predictions= predict.export_for_tables()
+        # if status:
+        #     # x = vanga_core.get_future_predictions() 
+            
+        #     return  x
+        # else: 
+        #     print(predictions)
     def scatter():
         #TODO ENTER A FUNCTION TO GET DATA FROM DB
         #AND INSERT IT TO THE X& Y

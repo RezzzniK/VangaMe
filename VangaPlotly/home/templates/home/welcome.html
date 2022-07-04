@@ -2,7 +2,7 @@
 <p></p>
 {%load plotly_dash%} {% load bootstrap_icons %}
 <h1>Home Page</h1>
-<div class="table">
+<div class="table" style="float: left; position: relative; width: 40vw">
   <table class="table table-striped table-dark">
     <thead>
       <tr>
@@ -15,9 +15,31 @@
       {% for rowTable in table_prediction %}
       <tr>
         {% for rowRow in rowTable %} {% if rowRow == 'Positive' %}
-        <td style="color: rgb(22, 244, 22)">{% bs_icon 'arrow-up' %}</td>
+        <td>
+          <p
+            style="
+              color: rgb(22, 244, 22);
+              transform: rotate(45deg);
+              position: absolute;
+            "
+          >
+            {% bs_icon 'arrow-up' size='1.8rem' %}
+          </p>
+        </td>
+
         {% elif rowRow == 'Negative' %}
-        <td style="color: rgb(233, 25, 17)">{% bs_icon 'arrow-down' %}</td>
+        <td>
+          <p
+            style="
+              color: rgb(233, 25, 17);
+              transform: rotate(-45deg);
+              position: absolute;
+            "
+          >
+            {% bs_icon 'arrow-down' size='1.8rem' %}
+          </p>
+        </td>
+
         {% else %}
         <td>{{rowRow}}</td>
         {% endif %} {% endfor %}

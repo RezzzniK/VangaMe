@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_plotly_dash.apps.DjangoPlotlyDashConfig',
     'home.apps.HomeConfig',
+    'home.prediction_app',
     'channels',
     'channels_redis',
 ]
