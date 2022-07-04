@@ -522,12 +522,12 @@ def get_coin_predictions_history_accuracy_1(terms_and_tickers, dates=None, multi
 
     return return_dict
 
-def get_data_for_accuracy_table_view(terms_and_tickers, start_date, end_date):
-    if not terms_and_tickers:
-        terms_and_tickers = basic_search_term_google_and_yf_ticker_name
+def get_data_for_monthly_accuracy_table_view(term_and_tickers):
+    start_date = (datetime.today() - timedelta(days=30)).strftime("%Y-%m-%d")
+    end_date = datetime.today().strftime("%Y-%m-%d")
 
     coins_list = []
-    for term in terms_and_tickers:
+    for term in term_and_tickers:
         coins_list.append(term[0])
 
     predictions_accuracy = {}
@@ -553,7 +553,6 @@ def get_data_for_accuracy_table_view(terms_and_tickers, start_date, end_date):
             print("Exception class is: ", err._class_)
 
     return predictions_accuracy
-
 # def get_coin_predictions_history_accuracy(terms_and_tickers):
 #     jobs = []
 #     manager = mlpcs.Manager()
