@@ -12,14 +12,16 @@ import home.prediction_app.vanga_configs as cfg
 def home(requests):
     
     def tabl_prediction():
-        print('sdfdsfsdfsdfsdfsdf')
-        #TODO :insert prediction func here FOR TABLE
+        
+        #TO DO ASYNC RUNNING EVERY MINUTE
         status, predictions=predict.get_future_predictions(term_and_tickers=cfg.basic_search_term_google_and_yf_ticker_name, days_to_subtract=None, check_x_last_hours=24) 
-        print(f'=============================================={predictions}=========================')
+       
+        #print(f'=============================================={predict.get_predictions_accuracy(term_and_tickers=cfg.basic_search_term_google_and_yf_ticker_name, days_to_subtract=6)}=========================')
+        
         if status:
             return predictions
         else:
-            return 'eeeeeeeee'
+            print('no dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
         # status,predictions= predict.export_for_tables()
         # if status:
         #     # x = vanga_core.get_future_predictions() 

@@ -1,6 +1,6 @@
 __DETAILED_PRINTING__ = True
 
-db_filename = "database/db_test_threshold_x.db"
+db_filename = "home/prediction_app/database/db_test_threshold_7.db"
 
 yfinance_table_name = 'yfinance_data'
 prediction_accuracy_table_name = "prediction_accuracy"

@@ -93,6 +93,7 @@ def write_predictions_accuracy_to_sql_for_each_date(coin_name, yf_tickers_name, 
     if data_history.empty:
         return
 
+    yfinance_data = None
     try:
         conn = sqlite3.connect(db_filename, timeout=20)
         cur = conn.cursor()
@@ -118,9 +119,10 @@ def write_predictions_accuracy_to_sql_for_each_date(coin_name, yf_tickers_name, 
     coin_real_evaluations_per_date = []
     # get list of dates
     # get real sentiment for each date
-    for row in yfinance_data:
-        loop_dates.append(row[0])
-        coin_real_evaluations_per_date.append(row[1])
+    if yfinance_data:
+        for row in yfinance_data:
+            loop_dates.append(row[0])
+            coin_real_evaluations_per_date.append(row[1])
 
     print(f"start scraping {coin_name}")
     gn = GoogleNews()
@@ -519,6 +521,38 @@ def get_coin_predictions_history_accuracy_1(terms_and_tickers, dates=None, multi
     print("\nAll Set And Done!\n")
 
     return return_dict
+
+def get_data_for_accuracy_table_view(terms_and_tickers, start_date, end_date):
+    if not terms_and_tickers:
+        terms_and_tickers = basic_search_term_google_and_yf_ticker_name
+
+    coins_list = []
+    for term in terms_and_tickers:
+        coins_list.append(term[0])
+
+    predictions_accuracy = {}
+    for coin_name in coins_list:
+        try:
+            conn = sqlite3.connect(db_filename, timeout=20)
+            cur = conn.cursor()
+
+            coin = coin_name.replace('"', "")
+            get_prediction_accuracy_data_sql_command = f"""SELECT prediction_date, correct_wrong_prediction 
+                                                            FROM {prediction_accuracy_table_name}
+                                                            WHERE prediction_date BETWEEN '{start_date}' AND '{end_date}'
+                                                            AND coin_name = '{coin}'
+                                                            ORDER BY prediction_date asc"""
+
+            cur.execute(get_prediction_accuracy_data_sql_command)
+            coin_accuracy_data = cur.fetchall()
+            predictions_accuracy[coin_name] = coin_accuracy_data
+
+            conn.close()
+        except sqlite3.Error as err:
+            print('Sql error: %s' % (' '.join(err.args)))
+            print("Exception class is: ", err._class_)
+
+    return predictions_accuracy
 
 # def get_coin_predictions_history_accuracy(terms_and_tickers):
 #     jobs = []

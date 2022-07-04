@@ -6,7 +6,7 @@ import sqlite3
 from home.prediction_app.vanga_configs import *
 from home.prediction_app.vanga_configs import __DETAILED_PRINTING__
 # use for debug printing
-# __DETAILED_PRINTING__ = False
+__DETAILED_PRINTING__ = True
 
 
 # CREATE table for coin_name, ticker_name

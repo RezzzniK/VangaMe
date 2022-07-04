@@ -32,13 +32,16 @@ def get_future_predictions(term_and_tickers, days_to_subtract=None, check_x_last
 
 
 def get_predictions_accuracy(term_and_tickers, days_to_subtract=2):
+    status, msg = create_vanga_me_db_file()
+    if not status:
+        return status, msg
+        
     try:
         today = datetime.now()
         start_date = today - timedelta(days=days_to_subtract)
 
         prediction_accuracy = get_coin_predictions_history_accuracy(term_and_tickers,
-                                                                    # start_date=start_date.strftime("%Y-%m-%d"),
-                                                                    start_date="2022-03-01",
+                                                                    start_date=start_date.strftime("%Y-%m-%d"),
                                                                     end_date=today.strftime("%Y-%m-%d"),
                                                                     multiprocess_enabled=True)
         for prediction in prediction_accuracy.items():

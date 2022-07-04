@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% load static %} {%block content%}
 <p></p>
 {%load plotly_dash%} {% load bootstrap_icons %}
-<h1>Home Page</h1>
+
 <div class="table" style="float: left; position: relative; width: 40vw">
   <table class="table table-striped table-dark">
     <thead>
@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      {% for rowTable in table_prediction %}
+      {% if table_prediction %} {% for rowTable in table_prediction %}
       <tr>
         {% for rowRow in rowTable %} {% if rowRow == 'Positive' %}
         <td>
@@ -44,7 +44,7 @@
         <td>{{rowRow}}</td>
         {% endif %} {% endfor %}
       </tr>
-      {% endfor %}
+      {% endfor %} {% endif %}
     </tbody>
   </table>
 </div>
