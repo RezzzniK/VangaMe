@@ -50,12 +50,57 @@
 </div>
 <div
   class="{% plotly_class name='SimpleExample' %} card"
-  style="width: 100%; height: 100%"
+  style="width: 75%; height: 100%"
 >
-  {% plotly_app name="SimpleExample" ratio=0.65 %}
+  <table>
+    <tr>
+      <td>
+        <form action="/ShowCryptoHistory" method="post" id="historyForm">
+          {% csrf_token %}
+          <button
+            class="btn btn-primary"
+            value="Bitcoin"
+            name="history"
+            type="submit"
+            form="historyForm"
+          >
+            Show Bitcoin
+          </button>
+          <button
+            class="btn btn-secondary"
+            value="Ethereum"
+            name="history"
+            type="submit"
+            form="historyForm"
+          >
+            Show Ethereum
+          </button>
+          <button
+            class="btn btn-danger"
+            value="BinanceCoin"
+            name="history"
+            type="submit"
+            form="historyForm"
+          >
+            Show BinanceCoin
+          </button>
+          <button
+            class="btn btn-warning"
+            value="Tether"
+            name="history"
+            type="submit"
+            form="historyForm"
+          >
+            Show Tether
+          </button>
+        </form>
+        {{ plot|safe }}
+      </td>
+    </tr>
+  </table>
+
+  <!-- {% plotly_app name="SimpleExample" ratio=0.65 %} -->
 </div>
-<br />
-<hr />
-{{ plot|safe }} {% endblock %}
+{% endblock %}
 
 <!--   -->

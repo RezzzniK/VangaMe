@@ -1,0 +1,14 @@
+Collected data for last: 24 hours
+Collected at: 22-07-08_16-06-48
+-------------------------------------------------
+
+Coin: Bitcoin
+Shift Prediction: Positive
+Prediction Strength: 0.634699999999999
+-------------------------------------------------
+
+Coin: Ethereum
+Shift Prediction: Positive
+Prediction Strength: 3.9095999999999997
+-------------------------------------------------
+
