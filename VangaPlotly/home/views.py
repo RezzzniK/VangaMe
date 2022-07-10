@@ -97,7 +97,7 @@ def ShowCryptoHistory(request):
             'XRP':['XRP', 'XRP-USD'], 
             'Polkadot':['Polkadot', 'DOT1-USD'],
             'USDCoin':['USDCoin', 'USDC-USD'],
-             '"hex coin"':['"hex coin"', 'HEX-USD'],
+             'hex coin':['"hex coin"', 'HEX-USD'],
              'Dogecoin':['Dogecoin', 'DOGE-USD'],
              'Avalanche':['Avalanche', 'AVAX-USD']
         }
